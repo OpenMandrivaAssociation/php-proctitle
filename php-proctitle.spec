@@ -5,15 +5,13 @@
 
 Summary:	Allows setting the current process name on Linux and BSD
 Name:		php-%{modname}
-Version:	0.1.1
-Release:	%mkrel 17
+Version:	0.1.2
+Release:	%mkrel 1
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/proctitle
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 Source1:	%{modname}.ini
-Patch0:		proctitle-0.1.1-php54x.diff
-Patch1:		proctitle-0.1.1-thread_name.diff
 BuildRequires:	php-devel >= 3:5.2.1
 BuildRequires:	dos2unix
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -27,9 +25,6 @@ in process list
 
 %setup -q -n %{modname}-%{version}
 [ "../package.xml" != "/" ] && mv ../package.xml .
-
-%patch0 -p0
-%patch1 -p1
 
 cp %{SOURCE1} %{inifile}
 
@@ -78,4 +73,3 @@ rm -rf %{buildroot}
 %doc LICENSE README package*.xml
 %config(noreplace) %attr(0644,root,root) %{_sysconfdir}/php.d/%{inifile}
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
-
